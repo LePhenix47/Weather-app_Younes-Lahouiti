@@ -1,0 +1,20 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Lato, sans-serif;
+  background: linear-gradient(45deg, #4ba0d9, #70d6fa, #ffffff);
+  padding: clamp(20px, 5vw, 50px) 20px 10px;
+}
+
+.main__container {
+  height: 100vh;
+}
+
+/*# sourceMappingURL=style.css.map */

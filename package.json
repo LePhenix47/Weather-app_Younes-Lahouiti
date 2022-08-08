@@ -1,0 +1,14 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "This file contains all the utilities for this project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./main.scss:./public/css/style.css",
+    "prefix": "postcss ./public/css/style.css --autoprefixer -d ./public/css/prefixed/style.css"
+  },
+  "browserslist": "last 4 versions",
+  "author": "Younes LAHOUITI",
+  "license": "ISC"
+}

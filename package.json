@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass --watch ./main.scss:./public/css/style.css",
-    "prefix": "postcss ./public/css/style.css --autoprefixer -d ./public/css/prefixed/style.css"
+    "prefix": "postcss ./public/css/style.css --autoprefixer -d ./public/css/prefixed/style.css --style compressed"
   },
   "browserslist": "last 4 versions",
   "author": "Younes LAHOUITI",

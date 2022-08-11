@@ -6,19 +6,241 @@
     padding: 0;
 }
 
+label:hover {
+    cursor: pointer;
+}
+
 body {
     min-height: 100vh;
     font-family: Lato, sans-serif;
-    background: linear-gradient(45deg, #4ba0d9, #70d6fa, #ffffff);
-    padding: clamp(20px, 5vw, 50px) 20px 10px;
 }
 
 //Variables
+$color-text: #333333;
+$color-subtext-color: #dddddd;
+$color-disabled: #cfcfcf;
+
+$border-color: #b8b8b8;
+
+
+$breakpoints: (
+    mobile: 768px,
+    tablet: 992px,
+    laptop: 993px,
+    desktop: 1150px
+);
+
+//Mixins
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: map-get($breakpoints, mobile)) and (max-width: map-get($breakpoints, tablet)) {
+        @content;
+    }
+}
+
+@mixin laptop-only {
+    @media screen and (min-width: map-get($breakpoints, laptop)) and (max-width: map-get($breakpoints, desktop)) {
+        @content;
+    }
+}
+
+@mixin center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin center-flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
 .main {
     &__container {
+        @include center-flex-column;
+        background: linear-gradient(45deg, #4ba0d9, #70d6fa, #ffffff);
         height: 100vh;
+        color: $color-text;
+        overflow: hidden;
+    }
+}
+
+.card {
+    &__container {
+        height: 545px;
+        width: 375px;
+        background-color: #cdeefb;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    &__hourly {
+        display: none;
+    }
+
+    &__hour {
+        @include center-flex-column;
+        position: relative;
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 5px;
+
+        }
+    }
+
+    &__day {
+        @include center-flex-column;
+    }
+
+    &__forecasts {
+        display: none;
+    }
+
+    &__future-weather {
+        background-color: #fff;
+        border-top: 1px solid $border-color;
+        border-radius: 25px 25px 10px 10px;
+    }
+
+    &__buttons {
+        height: 180px;
+    }
+
+    &__info {
+        height: 365px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__info-title {
+        text-align: center;
+        font-weight: 400;
+        margin-top: 30px;
+
+        &>span {
+            font-weight: 700;
+        }
+    }
+
+    &__info-icon {
+        @include center-flex-column;
+        margin: 45px 0;
+
+        &>* {
+            transform: rotate(0deg);
+            animation-name: rotate;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            font-size: 55px;
+            color: orange;
+        }
+    }
+
+    &__info-degrees {
+        @include center-flex-column;
+
+        &>h2 {
+            font-size: 54px;
+        }
+    }
+
+    &__info-location {
+        @include center-flex-column;
+        margin-bottom: 50px;
+
+        &>h2 {
+            font-weight: 300;
+            font-size: 28px;
+        }
+    }
+
+    &__hourly-label {
+        text-align: center;
+        border: 1px solid $border-color;
+        padding: 5px 10px;
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        color: $color-disabled;
+        margin: 30px 50px;
+    }
+
+    &__hourly-input {
+        display: none;
+
+        &:checked+.card__hourly-label {
+            color: $color-text;
+        }
+
+        &:checked~.card__hourly-forecasts>.card__hourly {
+            // display: block;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+    }
+
+    //I'm totally ashamed by the fact that I have to use margin to center the labels
+    &__forecasts-label {
+        text-align: center;
+        border: 1px solid $border-color;
+        padding: 5px 10px;
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        color: $color-disabled;
+        margin: 30px 35px;
+    }
+
+    &__forecasts-input {
+        display: none;
+
+        &:checked+.card__forecasts-label {
+            color: $color-text;
+        }
+
+        &:checked~.card__hourly-forecasts>.card__forecasts {
+            // display: block;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+    }
+
+    &__hourly-forecasts {
+        width: 100%;
+    }
+
+
+    &__separation {
+        height: 50px;
+        width: 1px;
+        background-color: $color-subtext-color;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
     }
 }

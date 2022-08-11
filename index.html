@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
-  <!-- meta -->
+  <!-- Meta tags-->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="This is a small weather application">
 
   <!-- Title -->
   <title>Weather app</title>
@@ -22,7 +23,7 @@
   <script src="https://kit.fontawesome.com/904e9ee361.js" crossorigin="anonymous"></script>
 
   <!-- Page logo -->
-  <link rel="icon" href="./ressources/gradient.jpg" type="image/gif">
+  <link rel="icon" href="./ressources/weather-icon.png" type="image/gif">
 
   <!-- JS -->
   <script defer src="main.js"></script>
@@ -31,9 +32,125 @@
 <body>
 
   <main class="main__container">
-    <section class="card__container">
+    <div class="page-loader"></div>
 
-    </section>
+    <div class="card__container">
+      <div class="card__info">
+        <h2 class="card__info-title"><span>Weather</span> application</h2>
+        <div class="card__info-icon">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <div class="card__info-degrees">
+          <h2>30°C</h2>
+        </div>
+        <div class="card__info-location">
+          <h2>
+            Europe/Paris
+          </h2>
+        </div>
+      </div>
+
+      <div class="card__future-weather">
+        <div class="card__buttons">
+
+          <input type="radio" name="hourly-forecasts" id="hourly" class="card__hourly-input" checked>
+          <label for="hourly" class="card__hourly-label">Hourly</label>
+
+          <input type="radio" name="hourly-forecasts" id="forecasts" class="card__forecasts-input">
+          <label for="forecasts" class="card__forecasts-label">Forecasts</label>
+
+          <div class="card__hourly-forecasts">
+
+            <div class="card__hourly">
+
+              <div class="card__hour">
+                <h3>9h</h3>
+                <p>18°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>12h</h3>
+                <p>21°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>15h</h3>
+                <p>25°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>18h</h3>
+                <p>23°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>21h</h3>
+                <p>19°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>00h</h3>
+                <p>17°C</p>
+              </div>
+              <div class="card__separation"></div>
+              <div class="card__hour">
+                <h3>3h</h3>
+                <p>15°C</p>
+              </div>
+
+
+
+            </div>
+
+            <div class="card__forecasts">
+
+              <div class="card__day">
+                <h3>Tue</h3>
+                <p>28°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Wed</h3>
+                <p>25°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Thu</h3>
+                <p>25°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Fri</h3>
+                <p>23°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Sat</h3>
+                <p>22°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Sun</h3>
+                <p>28°C</p>
+              </div>
+              <div class="card__separation"></div>
+
+              <div class="card__day">
+                <h3>Mon</h3>
+                <p>28°C</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
 </body>

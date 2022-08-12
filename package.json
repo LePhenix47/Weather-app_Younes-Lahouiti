@@ -5,10 +5,13 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch ./main.scss:./public/css/style.css",
-    "prefix": "postcss ./public/css/style.css --autoprefixer -d ./public/css/prefixed/style.css --style compressed"
+    "sass": "sass --watch ./main.scss:./public/css/style.css --style compressed",
+    "prefix": "postcss ./public/css/style.css --autoprefixer -d ./public/css/prefixed/style.css"
   },
   "browserslist": "last 4 versions",
   "author": "Younes LAHOUITI",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  }
 }

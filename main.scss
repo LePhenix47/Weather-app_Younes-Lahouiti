@@ -91,15 +91,6 @@ $breakpoints: (
     &__hour {
         @include center-flex-column;
         position: relative;
-
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 5px;
-
-        }
     }
 
     &__day {
@@ -139,16 +130,11 @@ $breakpoints: (
 
     &__info-icon {
         @include center-flex-column;
-        margin: 45px 0;
+        margin: 10px 0;
 
         &>* {
-            transform: rotate(0deg);
-            animation-name: rotate;
-            animation-duration: 5s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            font-size: 55px;
-            color: orange;
+            width: 125px;
+            height: 125px;
         }
     }
 
@@ -167,6 +153,15 @@ $breakpoints: (
         &>h2 {
             font-weight: 300;
             font-size: 28px;
+        }
+
+        &-flag {
+            margin-top: 10px;
+            width: 35px;
+            height: 20px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 4px;
         }
     }
 
@@ -236,11 +231,5 @@ $breakpoints: (
         height: 50px;
         width: 1px;
         background-color: $color-subtext-color;
-    }
-}
-
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
     }
 }

@@ -43,12 +43,6 @@ body {
   align-items: center;
   position: relative;
 }
-.card__hour::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 5px;
-}
 .card__day {
   display: flex;
   flex-direction: column;
@@ -85,16 +79,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 45px 0;
+  margin: 10px 0;
 }
 .card__info-icon > * {
-  transform: rotate(0deg);
-  animation-name: rotate;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  font-size: 55px;
-  color: orange;
+  width: 125px;
+  height: 125px;
 }
 .card__info-degrees {
   display: flex;
@@ -115,6 +104,14 @@ body {
 .card__info-location > h2 {
   font-weight: 300;
   font-size: 28px;
+}
+.card__info-location-flag {
+  margin-top: 10px;
+  width: 35px;
+  height: 20px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
 }
 .card__hourly-label {
   text-align: center;
@@ -167,12 +164,6 @@ body {
   height: 50px;
   width: 1px;
   background-color: #dddddd;
-}
-
-@keyframes rotate {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

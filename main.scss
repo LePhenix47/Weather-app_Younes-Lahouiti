@@ -72,8 +72,117 @@ $breakpoints: (
         height: 100vh;
         color: $color-text;
         overflow: hidden;
+        position: relative;
     }
 }
+
+.page-loader {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    height: 545px;
+    width: 375px;
+    z-index: 69;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    opacity: 1;
+    animation: fadeOut 250ms 2s ease-out forwards;
+    border-radius: 10px;
+
+    @include mobile-only {
+        height: 545px;
+        width: 80vw;
+    }
+
+    &__ball {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: black;
+        transform: translateY(0%);
+
+        @include mobile-only {
+            height: 35px;
+            width: 35px;
+        }
+
+        &:nth-child(1) {
+            background-color: #ffa500;
+            animation: bouncing-balls 600ms ease-in-out 4 alternate both;
+        }
+
+        &:nth-child(2) {
+            background-color: #a6e5fc;
+            animation: bouncing-balls 600ms 100ms ease-in-out 4 alternate both;
+        }
+
+        &:nth-child(3) {
+            background-color: grey;
+            animation: bouncing-balls 600ms 200ms ease-in-out 4 alternate both;
+        }
+    }
+}
+
+//"Sussy baka" -The Rock, 2020
+/*
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠛⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠋⠈⠀⠀⠀⠀⠐⠺⣖⢄⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡏⢀⡆⠀⠀⠀⢋⣭⣽⡚⢮⣲⠆⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇⡼⠀⠀⠀⠀⠈⠻⣅⣨⠇⠈⠀⠰⣀⣀⣀⡀⠀⢸⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣟⢷⣶⠶⣃⢀⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠈⠓⠚⢸⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⢀⡠⠀⡄⣀⠀⠀⠀⢻⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠐⠉⠀⠀⠙⠉⠀⠠⡶⣸⠁⠀⣠⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣦⡆⠀⠐⠒⠢⢤⣀⡰⠁⠇⠈⠘⢶⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠠⣄⣉⣙⡉⠓⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⣀⠀⣀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+*/
+
+
+@keyframes bouncing-balls {
+    0% {
+        transform: translateY(100%);
+    }
+
+
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    90% {
+
+        opacity: 0;
+    }
+
+
+    100% {
+        z-index: -1;
+    }
+}
+
+//Not animatable btw, just to make it disappear after the page finished loading
+// @keyframes fadeOutDisplayNone {
+//     from {
+//         display: block;
+//     }
+
+//     to {
+//         display: none;
+//     }
+// }
+
 
 .card {
     &__container {
@@ -82,6 +191,10 @@ $breakpoints: (
         background-color: #cdeefb;
         border-radius: 10px;
         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+
+        @include mobile-only {
+            width: 80%;
+        }
     }
 
     &__hourly {
@@ -174,7 +287,20 @@ $breakpoints: (
         height: 30px;
         border-radius: 5px;
         color: $color-disabled;
+        transition: background-color 150ms ease-out;
         margin: 30px 50px;
+
+        @include mobile-only {
+            margin: 10px 30%;
+        }
+
+        &:hover {
+            background-color: darken(white, 10%);
+        }
+
+        &:active {
+            background-color: lighten(white, 10%);
+        }
     }
 
     &__hourly-input {
@@ -204,6 +330,18 @@ $breakpoints: (
         border-radius: 5px;
         color: $color-disabled;
         margin: 30px 35px;
+
+        @include mobile-only {
+            margin: 10px 30%;
+        }
+
+        &:hover {
+            background-color: darken(white, 10%);
+        }
+
+        &:active {
+            background-color: lighten(white, 10%);
+        }
     }
 
     &__forecasts-input {

@@ -1,6 +1,6 @@
 const currentWeatherAppAPIKey = "eb43ae8f0b5ee3389473805bd179c44e";
 
-// const forecastsWeatherApAPIKey = "a783ff1b655a8efef32760dc98437171";
+const forecastsWeatherApAPIKey = "a783ff1b655a8efef32760dc98437171"; //DOES NOT WORK
 
 const urlCountryFlagsAPI = "https://countryflagsapi.com/png/";
 
@@ -46,11 +46,12 @@ async function callForecastsWeatherAPI(longitude, latitude) {
     let response = await fetch(urlForecastsWeatherAppAPI);
     let weatherForecasts = await response.json();
 
-    // console.log("Forecasts API response: ", weatherForecasts);
+    console.log("Forecasts API response: ", weatherForecasts);
     forecastsDataHourly = weatherForecasts.hourly;
     forecastsDataDaily = weatherForecasts.daily;
 
     changeHourlyTemperatures();
+    changeDailyTemperatures();
 
     // console.log(forecastsDataHourly, forecastsDataDaily);
   } catch (APIerror) {
@@ -58,14 +59,24 @@ async function callForecastsWeatherAPI(longitude, latitude) {
   }
 }
 
+let currentLatitude = 0;
+let currentLongitude = 0;
+let locationCalls = 0;
+
 function getUserCoordinatesAndGiveLocalWeather() {
-  navigator.geolocation.watchPosition((position) => {
-    let currentLatitude = position.coords.latitude;
-    let currentLongitude = position.coords.longitude;
-    // console.log("Watch position: ", position.coords);
-    callCurrentWeatherAPI(currentLongitude, currentLatitude);
-    callForecastsWeatherAPI(currentLongitude, currentLatitude);
-  });
+  if (locationCalls === 0) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      //WARNING: If you ever plan on making a weather application, you should use getCurrentPosition() than watchPosition() otherwise it will call these functions every few minutes
+      currentLatitude = position.coords.latitude;
+      currentLongitude = position.coords.longitude;
+      // console.log("Watch position: ", position.coords);
+      callCurrentWeatherAPI(currentLongitude, currentLatitude);
+      callForecastsWeatherAPI(currentLongitude, currentLatitude);
+    });
+  } else {
+    return;
+  }
+  locationCalls++;
 }
 
 getUserCoordinatesAndGiveLocalWeather();
@@ -154,6 +165,8 @@ let orderedDaysInWeek = daysOfTheWeek
 function changeDailyTemperatures() {
   for (let i = 0; i < dailyHourCards.length; i++) {
     dailyHourCards[i].textContent = `${orderedDaysInWeek[i].substring(0, 3)}`;
+    dailyTemperatureCards[i].textContent = `${Math.trunc(
+      forecastsDataDaily[i].temp.day
+    )}°C`;
   }
 }
-changeDailyTemperatures();

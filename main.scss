@@ -1,3 +1,96 @@
+//SASS Variables 
+$bg-color-primary: #4ba0d9;
+$bg-color-secondary: #70d6fa;
+$bg-color-tertiary: white;
+
+$bg-color-primary--dark-theme: #267bb4;
+$bg-color-secondary--dark-theme: #056689; //
+$bg-color-tertiary--dark-theme: black;
+
+
+
+$color-text: #333333;
+$color-subtext-color: #dddddd;
+$color-disabled: #cfcfcf;
+
+$border-color: #b8b8b8;
+
+$card-bg-color: white;
+$top-card-bg-color: #cdeefb;
+
+$label-bg-color--hover: darken($card-bg-color, 10%);
+$label-bg-color--active: lighten($card-bg-color, 10%);
+
+$shadow-color: rgba(0, 0, 0, 0.5);
+
+//CSS variables
+:root {
+    color-scheme: light;
+
+    --bg-color-primary: #{$bg-color-primary};
+    --bg-color-secondary: #{$bg-color-secondary};
+    --bg-color-tertiary: #{$bg-color-tertiary};
+
+    --bg-color-primary--dark-theme: #{$bg-color-primary--dark-theme};
+    --bg-color-secondary--dark-theme: #{$bg-color-secondary--dark-theme};
+    --bg-color-tertiary--dark-theme: #{$bg-color-tertiary--dark-theme};
+
+    --color-text: #{$color-text};
+    --color-subtext-color: #{$color-subtext-color};
+    --color-disabled: #{$color-disabled};
+    --border-color: #{$border-color};
+    --card-bg-color: #{$card-bg-color};
+    --top-card-bg-color: #{$top-card-bg-color};
+
+    --label-bg-color--hover: #{$label-bg-color--hover};
+    --label-bg-color--active: #{$label-bg-color--active};
+
+    --shadow-color: #{$shadow-color};
+}
+
+
+@media (prefers-color-scheme:dark) {
+    //SASS variables
+    $color-text: #cccccc;
+    $color-subtext-color: #222222;
+    $color-disabled: #303030;
+
+    $border-color: #474747;
+
+    $card-bg-color: black;
+    $top-card-bg-color: #042532;
+
+    $label-bg-color--hover: lighten($card-bg-color, 10%);
+    $label-bg-color--active: darken($card-bg-color, 10%);
+
+    $shadow-color: rgba(255, 255, 255, 0.5);
+
+    //CSS variables
+    :root {
+        color-scheme: dark;
+
+        --color-text: #{$color-text};
+        --color-subtext-color: #{$color-subtext-color};
+        --color-disabled: #{$color-disabled};
+        --border-color: #{$border-color};
+        --card-bg-color: #{$card-bg-color};
+        --top-card-bg-color: #{$top-card-bg-color};
+
+        --label-bg-color--hover: #{$label-bg-color--hover};
+        --label-bg-color--active: #{$label-bg-color--active};
+
+        --shadow-color: #{$shadow-color};
+    }
+
+    .main {
+        &__container {
+            background-position: 100% 100%;
+        }
+    }
+
+}
+
+//Norm & typo
 *,
 ::before,
 ::after {
@@ -15,12 +108,6 @@ body {
     font-family: Lato, sans-serif;
 }
 
-//Variables
-$color-text: #333333;
-$color-subtext-color: #dddddd;
-$color-disabled: #cfcfcf;
-
-$border-color: #b8b8b8;
 
 
 $breakpoints: (
@@ -63,14 +150,72 @@ $breakpoints: (
     align-items: center;
 }
 
+@mixin grid($rows: auto-fill, $columns: auto-fill, $gap: 0px) {
+    display: grid;
+    grid-template-rows: repeat($rows, 1fr);
+    grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin label-styling {
+    text-align: center;
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color: var(--color-disabled);
+    transition:
+        background-color 150ms ease-out,
+        color 150ms ease-out;
+
+    &:hover {
+        background-color: var(--label-bg-color--hover);
+    }
+
+    &:active {
+        background-color: var(--label-bg-color--active);
+    }
+
+    margin-left: 25%;
+    margin-right: 25%;
+
+    margin-top: 20%;
+    margin-bottom: 20%;
+
+    @include mobile-only {
+        width: 65%;
+        margin-left:
+            18%;
+        margin-top:
+            15px;
+        margin-bottom:
+            15px;
+
+    }
+}
+
 
 
 .main {
     &__container {
         @include center-flex-column;
-        background: linear-gradient(45deg, #4ba0d9, #70d6fa, #ffffff);
+        background-image: linear-gradient(45deg,
+                var(--bg-color-primary),
+                var(--bg-color-secondary),
+                var(--bg-color-tertiary),
+                var(--bg-color-primary--dark-theme),
+                var(--bg-color-secondary--dark-theme),
+                var(--bg-color-tertiary--dark-theme));
+        background-size: 335% 100%;
+
+        @include mobile-only {
+            background-size: 600% 100%;
+        }
+
         height: 100vh;
-        color: $color-text;
+        transition: background-position 350ms ease-out;
+        color: var(--color-text);
         overflow: hidden;
         position: relative;
     }
@@ -78,7 +223,7 @@ $breakpoints: (
 
 .page-loader {
     position: absolute;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--card-bg-color);
     height: 545px;
     width: 375px;
     z-index: 69;
@@ -86,6 +231,7 @@ $breakpoints: (
     justify-content: space-evenly;
     align-items: center;
     opacity: 1;
+    -webkit-animation: fadeOut 250ms 2s ease-out forwards;
     animation: fadeOut 250ms 2s ease-out forwards;
     border-radius: 10px;
 
@@ -108,16 +254,19 @@ $breakpoints: (
 
         &:nth-child(1) {
             background-color: #ffa500;
+            -webkit-animation: bouncing-balls 600ms ease-in-out 4 alternate both;
             animation: bouncing-balls 600ms ease-in-out 4 alternate both;
         }
 
         &:nth-child(2) {
             background-color: #a6e5fc;
+            -webkit-animation: bouncing-balls 600ms 100ms ease-in-out 4 alternate both;
             animation: bouncing-balls 600ms 100ms ease-in-out 4 alternate both;
         }
 
         &:nth-child(3) {
             background-color: grey;
+            -webkit-animation: bouncing-balls 600ms 200ms ease-in-out 4 alternate both;
             animation: bouncing-balls 600ms 200ms ease-in-out 4 alternate both;
         }
     }
@@ -143,6 +292,19 @@ $breakpoints: (
 */
 
 
+@-webkit-keyframes bouncing-balls {
+    0% {
+        transform: translateY(100%);
+    }
+
+
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+
 @keyframes bouncing-balls {
     0% {
         transform: translateY(100%);
@@ -152,6 +314,23 @@ $breakpoints: (
 
     100% {
         transform: translateY(-100%);
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    90% {
+
+        opacity: 0;
+    }
+
+
+    100% {
+        z-index: -1;
     }
 }
 
@@ -188,9 +367,9 @@ $breakpoints: (
     &__container {
         height: 545px;
         width: 375px;
-        background-color: #cdeefb;
+        background-color: var(--top-card-bg-color);
         border-radius: 10px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 5px 10px var(--shadow-color);
 
         @include mobile-only {
             width: 80%;
@@ -215,13 +394,19 @@ $breakpoints: (
     }
 
     &__future-weather {
-        background-color: #fff;
-        border-top: 1px solid $border-color;
+        background-color: var(--card-bg-color);
+        border-top: 1px solid var(--border-color);
         border-radius: 25px 25px 10px 10px;
     }
 
     &__buttons {
         height: 180px;
+        @include grid(2, 2);
+        position: relative;
+
+        @include mobile-only {
+            @include grid(3, 1)
+        }
     }
 
     &__info {
@@ -244,12 +429,16 @@ $breakpoints: (
     &__info-icon {
         @include center-flex-column;
         margin: 10px 0;
+        position: relative;
+
+
 
         &>* {
             width: 125px;
             height: 125px;
         }
     }
+
 
     &__info-degrees {
         @include center-flex-column;
@@ -272,42 +461,24 @@ $breakpoints: (
             margin-top: 10px;
             width: 35px;
             height: 20px;
+            -o-object-fit: cover;
             object-fit: cover;
+            -o-object-position: center;
             object-position: center;
             border-radius: 4px;
         }
     }
 
     &__hourly-label {
-        text-align: center;
-        border: 1px solid $border-color;
-        padding: 5px 10px;
-        display: inline-block;
-        width: 100px;
-        height: 30px;
-        border-radius: 5px;
-        color: $color-disabled;
-        transition: background-color 150ms ease-out;
-        margin: 30px 50px;
+        @include label-styling;
 
-        @include mobile-only {
-            margin: 10px 33%;
-        }
-
-        &:hover {
-            background-color: darken(white, 10%);
-        }
-
-        &:active {
-            background-color: lighten(white, 10%);
-        }
     }
 
     &__hourly-input {
         display: none;
 
         &:checked+.card__hourly-label {
-            color: $color-text;
+            color: var(--color-text);
         }
 
         &:checked~.card__hourly-forecasts>.card__hourly {
@@ -321,34 +492,15 @@ $breakpoints: (
 
     //I'm totally ashamed by the fact that I have to use margin to center the labels
     &__forecasts-label {
-        text-align: center;
-        border: 1px solid $border-color;
-        padding: 5px 10px;
-        display: inline-block;
-        width: 100px;
-        height: 30px;
-        border-radius: 5px;
-        color: $color-disabled;
-        margin: 30px 35px;
+        @include label-styling;
 
-        @include mobile-only {
-            margin: 10px 33%;
-        }
-
-        &:hover {
-            background-color: darken(white, 10%);
-        }
-
-        &:active {
-            background-color: lighten(white, 10%);
-        }
     }
 
     &__forecasts-input {
         display: none;
 
         &:checked+.card__forecasts-label {
-            color: $color-text;
+            color: var(--color-text);
         }
 
         &:checked~.card__hourly-forecasts>.card__forecasts {
@@ -362,12 +514,17 @@ $breakpoints: (
 
     &__hourly-forecasts {
         width: 100%;
+        grid-column-end: span 2;
+
+        @include mobile-only {
+            grid-column-end: auto;
+        }
     }
 
 
     &__separation {
         height: 50px;
         width: 1px;
-        background-color: $color-subtext-color;
+        background-color: var(--color-subtext-color);
     }
 }
